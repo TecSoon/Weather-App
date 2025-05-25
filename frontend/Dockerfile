@@ -2,6 +2,10 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Accept the API base URL as a build ARG
+ARG NEXT_PUBLIC_WEATHER_BE_BASE_URL
+ENV NEXT_PUBLIC_WEATHER_BE_BASE_URL=$NEXT_PUBLIC_WEATHER_BE_BASE_URL
+
 COPY package*.json ./
 RUN npm install
 
