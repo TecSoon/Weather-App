@@ -80,5 +80,9 @@ for frontend:
 NEXT_PUBLIC_WEATHER_BE_BASE_URL=http://localhost:3001
 ```
 
-backend: npm run dev
-frontend: npm run dev
+backend: ``npm run dev``
+
+frontend: ``npm run dev``
+
+### Automated testing for backend
+run ``npm run rest``
