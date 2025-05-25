@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  title: Weather Average API
+  version: 1.0.0
+  description: A simple API to calculate average temperature for a given city over a number of past days using Open-Meteo data.
+
+servers:
+  - url: http://localhost:3001
+    description: Local development server
+
+paths:
+  /weather/average:
+    get:
+      summary: Get average temperature
+      description: Fetches temperature data for the given city for the past X days and returns the average.
+      parameters:
+        - in: query
+          name: city
+          schema:
+            type: string
+          required: true
+          description: Name of the city (e.g., Berlin)
+        - in: query
+          name: days
+          schema:
+            type: integer
+            minimum: 1
+          required: true
+          description: Number of past days (excluding today) to calculate the average temperature
+      responses:
+        '200':
+          description: Average temperature data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  city:
+                    type: string
+                  days:
+                    type: integer
+                  average_temperature:
+                    type: string
+                    example: "17.5"
+        '400':
+          description: Invalid request (e.g. missing or bad parameters)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
